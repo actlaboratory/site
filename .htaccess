@@ -2,13 +2,22 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
+  #HTTPS only
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://https://actlab.org%{REQUEST_URI} [R=301,L]
+
+  #no www.
+  RewriteCond %{HTTP_HOST} ^www\.actlab\.org
+  RewriteRule ^(.*) https://actlab.org/$1 [R=301,L]
+
+
   # If the above doesn't work you might need to set the `RewriteBase` directive manually, it should be the
   # absolute physical path to the directory that contains this htaccess file.
   # RewriteBase /
 
 	RewriteCond %{REQUEST_URI} !(^/public/)
 	RewriteCond %{REQUEST_URI} !(^/bbs/)
-	RewriteCond %{REQUEST_URI} !(^/git-pull.php/)
+	RewriteCond %{REQUEST_URI} !(^/git-pull.php)
 	RewriteRule ^ index.php [QSA,L]
 
 # authenticate(Basic)
