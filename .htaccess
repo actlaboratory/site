@@ -20,9 +20,8 @@
 	RewriteCond %{REQUEST_URI} !(^/git-pull.php)
 	RewriteRule ^ index.php [QSA,L]
 
-# authenticate(Basic)
-AuthUserFile /virtual/actlab/.htpasswd
-AuthGroupFile /dev/null
-AuthName "Please enter your ID and password"
-AuthType Basic
-require valid-user
+	SetEnv DB_HOST 'localhost'
+	SetEnv DB_USER 'actlab'
+	SetEnv DB_NAME 'actlab'
+	SetEnv DB_PASS '********'
+	SetEnv BBS_PASS '********'
