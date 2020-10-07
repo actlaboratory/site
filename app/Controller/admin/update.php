@@ -150,7 +150,15 @@ function setUpdate($input,$db){
 		//ソフトIDをとってくる
 		$softwares=new Softwares($db);
 		$soft=$softwares->select(array("keyword"=>$info["keyword"]));
-
+		$assets_info = GitHubUtil::connect("/repos/".$soft["gitHubURL"]."releases/".$info["releaseId"]."/assets");
+		foreach $assets_info as $assets{
+			if $assets["name"] == $info["keyword"]."-".$info["version"]."_info.json"{
+				$info_assets = $assets;
+				break;
+			}
+		}
+		$content = GitHubUtil::get_assets($info_assets["url"]);
+		$file_info = json_decode($content, true);
 		$versionData=array(
 			"software_id"=>$soft["id"],
 
@@ -161,6 +169,7 @@ function setUpdate($input,$db){
 			"hist_text"=>$info["detailString"],
 			"package_URL"=>"https://github.com/".$soft["gitHubURL"]."releases/download/".$info["version"]."/".$info["file"],
 			"updater_URL"=>"https://github.com/".$soft["gitHubURL"]."releases/download/".$info["version"]."/".$info["patch"],
+			"updater_hash": $file_info["patch_hash"],
 			"update_min_Major"=>0,
 			"update_min_minor"=>0,
 			"released_at"=>date("Y-m-d"),
@@ -176,6 +185,7 @@ function setUpdate($input,$db){
 			"url"=>"/software/".$info["keyword"],
 			0
 		)));
+		$ret = GitHubUtil::connect("/repos/".$soft["gitHubURL"]."releases/assets/".$info_assets["id"], "DELETE")
 
 		//検証とドラフトのリリース
 		$gitData=GitHubUtil::connect("/repos/".$soft["gitHubURL"]."releases/".$info["releaseId"],"PATCH",array("draft"=>false));
