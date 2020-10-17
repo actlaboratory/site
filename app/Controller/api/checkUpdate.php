@@ -30,7 +30,6 @@ $app->get('/api/checkUpdate', function (Request $request, Response $response) {
 		return $response->withJson($json);
 	}
 	$software=$software[0];
-	var_dump($software);
 	SoftwareUtil::makeTextVersion($software);
 	$ret=SoftwareUtil::conpareVersion($software["versionText"],$data["version"]);
 
