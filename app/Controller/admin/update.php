@@ -154,7 +154,6 @@ function setUpdate($input,$db){
 		$info_assets = null;
 		foreach ($assets_info as $assets){
 			if($assets["name"] == $info["keyword"]."-".$info["version"]."_info.json"){
-				echo("ok");
 				$info_assets = $assets;
 				break;
 			}
@@ -193,8 +192,7 @@ function setUpdate($input,$db){
 		$ret = GitHubUtil::connect("/repos/".$soft["gitHubURL"]."releases/assets/".$info_assets["id"], "DELETE");
 
 		//検証とドラフトのリリース
-		$gitData=GitHubUtil::connect("/repos/".$soft["gitHubURL"]."releases/".$info["releaseId"],"PATCH",array("draft"=>false));
-
+		$gitData=GitHubUtil::connect("/repos/".$soft["gitHubURL"]."releases/".$info["releaseId"],"PATCH",array("draft"=>false, "body" => $versionData["hist_text"]));
 		$updaterequests->delete(array("id"=>$request["id"]));
 		return "更新が完了しました。";
 	}
