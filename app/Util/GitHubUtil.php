@@ -42,18 +42,15 @@ class GitHubUtil{
 	static function get_assets($assets_url){
 		$header=array(
 			"Accept: application/octet-stream",
-			"User-Agent: ACTLaboratory-webadmin",
-			"Authorization: token ".getenv("GITHUB_TOKEN")
+			"Authorization: token ".getenv("GITHUB_TOKEN"),
 		);
-		
-		$context = array(
-			"http" => array(
-				"method"  => "GET",
-				"header"  => implode("\r\n", $header),
-				"ignore_errors"=>true
-				)
-		);
-		$content = file_get_contents($assets_url, false, stream_context_create($context));
+		$handle = curl_init($assets_url);
+		curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($handle, CURLOPT_USERAGENT, "ACTLaboratory-webadmin");
+		curl_setopt($handle, CURLOPT_HTTPHEADER, $header);
+		curl_setopt($handle, CURLOPT_FOLLOWLOCATION, true);
+		$content = curl_exec($handle);
+		curl_close($handle);
 		return $content;
 	}
 
