@@ -34,17 +34,16 @@ if(!isset($_GET["repo_name"], $_GET["tag_name"], $_GET["password"])){
 	http_response_code(400);
 	exit("bad request");
 }
-if($_GET["password"] != getenv("delete_password")){
+if($_GET["password"] != getenv("SCRIPT_PASSWORD")){
+	http_response_code(400);
 	exit("invalid password");
 }
 $repo_url = $_GET["repo_name"];
 $tag_name = $_GET["tag_name"];
-$tag_name = "SOC-latestcommit";
 $json = connect_github("/repos/".$repo_url."/releases/tags/".$tag_name);
 if(isset($json["message"])){
 	exit("not found");
 }
 $release_id = $json["id"];
 $json = connect_github("/repos/".$repo_url."/releases/".$release_id, "delete");
-var_dump($json);
 ?>
