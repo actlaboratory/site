@@ -160,6 +160,7 @@ $app->get('/admin/request/{id}/', function (Request $request, Response $response
 			return showUpdateConfirm($data,$this->db,$this->view,$response,"");
 		}
 		if($info["type"]==="informations"){
+			$data["requestId"]=$id;
 			return showInformationsConfirm($data,"approve",$this->view,$response,"");
 		}
 	}

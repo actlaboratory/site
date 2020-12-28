@@ -43,7 +43,7 @@ $app->post('/admin/informations', function (Request $request, Response $response
 		if($input["step"]==="edit"){
 			return showInformationsConfirm($input,"confirm",$this->view,$response);
 		}else if($input["step"]==="confirm"){
-			return setInformationsRequest($input,$this->db,$this->view,$response);
+			return setInformationsRequest($input,$this->db,$this->view,$response, $request);
 		}
 	}
 });
@@ -65,7 +65,7 @@ function informationsCheck(array $data){
 	return $message;
 }
 
-function setInformationsRequest(array $data,$db,$view,$response){
+function setInformationsRequest(array $data,$db,$view,$response, $request){
 	$updaterequests=new Updaterequests($db);
 	$no=$updaterequests->insert(array(
 		"requester"=>$_SESSION["ID"],
@@ -73,12 +73,14 @@ function setInformationsRequest(array $data,$db,$view,$response){
 		"value"=>serialize($data)
 	));
 	$data["message"] ="リクエストを記録し、他のメンバーに承認を依頼しました。[リクエストNo:".$no."]";
+	$data["topPageUrl"]=$request->getUri()->getBasePath()."/admin/?".SID;
 	return $view->render($response, 'admin/request/request.twig', $data);
 }
 
 function setInformationsApprove(array $data,$db,$view,$response){	#本人以外のリクエストなので確定してDB反映
 	$updaterequests=new Updaterequests($db);
 	$request = $updaterequests->select(array(
+		"id"=>$data["requestId"],
 		"type"=>"informations"
 	));
 	$info=unserialize($request["value"]);
@@ -89,9 +91,10 @@ function setInformationsApprove(array $data,$db,$view,$response){	#本人以外�
 	$infoDB->insert(array(
 		"title"=>$info["infoString"],
 		"date"=>date("Y-m-d"),
-		"url"=>$info[infoURL],
+		"url"=>$info["infoURL"],
 		0
 	));
+	$updaterequests->delete(array("id"=>$data["requestId"]));
 	return "更新が完了しました。";
 }
 
