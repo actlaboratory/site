@@ -2,20 +2,11 @@
 
 use Slim\Http\Request;
 use Slim\Http\Response;
-use Model\Dao\Softwares;
-use Model\Dao\SoftwareVersions;
-use Model\Dao\Members;
-use Model\Dao\Updaterequests;
 use Model\Dao\informations;
-use Util\SoftwareUtil;
+use Model\Dao\Updaterequests;
 use Util\ValidationUtil;
-use Util\MembersUtil;
-use Util\GitHubUtil;
-use Util\EncryptUtil;
 
-
-// お知らせ配信画面
-
+// お知らせ配信画面表示
 $app->get('/admin/informations',function (Request $request, Response $response, $args) {
 	showInformationsEditor(array(),$this->db,$this->view,$response);
 });
@@ -31,6 +22,7 @@ function showInformationsEditor(array $data,$db,$view,$response,$message=""){
     return $view->render($response, 'admin/informations/index.twig', $data);
 }
 
+// お知らせ配信フォーム内容を検証
 $app->post('/admin/informations', function (Request $request, Response $response) {
 	$input = $request->getParsedBody();
 	$message = informationsCheck($input);
@@ -48,12 +40,14 @@ $app->post('/admin/informations', function (Request $request, Response $response
 	}
 });
 
+// お知らせ配信確認画面($step="confirm":リクエスト前, $step="approve":配信確定前)
 function showInformationsConfirm(array $data,$step,$view,$response){
 	$data["step"] = $step;
 	// Render view
     return $view->render($response, 'admin/informations/confirm.twig', $data);
 }
 
+// お知らせ内容（array）検証
 function informationsCheck(array $data){
 	$message = "";
 	if (empty($data["infoString"]) || ValidationUtil::checkParam($data,array("infoString"=>"/^.{10,100}$/"))==false){
@@ -65,6 +59,7 @@ function informationsCheck(array $data){
 	return $message;
 }
 
+// お知らせ配信リクエスト登録
 function setInformationsRequest(array $data,$db,$view,$response, $request){
 	$updaterequests=new Updaterequests($db);
 	$no=$updaterequests->insert(array(
@@ -77,6 +72,7 @@ function setInformationsRequest(array $data,$db,$view,$response, $request){
 	return $view->render($response, 'admin/request/request.twig', $data);
 }
 
+// お知らせ配信確定
 function setInformationsApprove(array $data,$db,$view,$response){	#本人以外のリクエストなので確定してDB反映
 	$updaterequests=new Updaterequests($db);
 	$request = $updaterequests->select(array(
