@@ -10,7 +10,7 @@ $app->get('/admin/softwares/', function (Request $request, Response $response) {
     $softwares = new softwares($this->db);
 
     $data = [];
-	$data["softwares"]=$softwares->getLatestIgnoreHiden(null, FLG_HIDEN);
+	$data["softwares"]=$softwares->getLatest();
 	foreach($data["softwares"] as &$software){
         SoftwareUtil::makeTextVersion($software);
         if($software["flag"]==FLG_HIDEN){
