@@ -42,10 +42,10 @@ $app->get('/admin/softwares/edit/{keyword}',function (Request $request, Response
 			$data["staff"]=$about["staff"];
 			$data["snapshotTag"]=preg_replace("[^.+releases/download/([^/]+)/.+$]","$1",$about["snapshotURL"]);
 			$data["snapshotFile"]=preg_replace("[^.+releases/download/[^/]+/(.+)$]","$1",$about["snapshotURL"]);
-			if($about["flag"]&FLG_HIDEN==FLG_HIDEN){
-				$data["hiden"]="yes";
+			if($about["flag"]&FLG_HIDDEN==FLG_HIDDEN){
+				$data["hidden"]="yes";
 			}else{
-				$data["hiden"]="no";
+				$data["hidden"]="no";
 			}
 			$data["flag"]=$about["flag"];
 		}
@@ -299,15 +299,10 @@ function setNew($input,$db){
 			"identifier"=>$input["keyword"],
 			"requester"=>$_SESSION["ID"],
 		));
-		if($input["hiden"]!="no"){
-			if($input["flag"] & FLG_HIDEN == 0){$input["flag"]+=FLG_HIDEN;}
+		if($input["hidden"]!="no"){
+			$input["flag"]=FLG_HIDDEN;
 		}else{
-			if($input["flag"] & FLG_HIDEN == FLG_HIDEN){$input["flag"]-=FLG_HIDEN;}
-		}
-		if($input["hiden"]=="no"){
-			if(($input["flag"] & FLG_HIDEN == 0)){$input["flag"]+=FLG_HIDEN;}
-		}else{
-			if(($input["flag"] & FLG_HIDEN == FLG_HIDEN)){$input["flag"]-=FLG_HIDEN;}
+			$input["flag"]=0;
 		}
 		$no=$updaterequests->insert(array(
 			"requester"=>$_SESSION["ID"],
@@ -396,10 +391,10 @@ function setEdit($input,$db){
 			"identifier"=>$input["keyword"],
 			"requester"=>$_SESSION["ID"],
 		));
-		if($input["hiden"]!="no"){
-			if(($input["flag"] & FLG_HIDEN) == 0){$input["flag"]+=FLG_HIDEN;}
+		if($input["hidden"]!="no"){
+			if(($input["flag"] & FLG_HIDDEN) == 0){$input["flag"]+=FLG_HIDDEN;}
 		}else{
-			if(($input["flag"] & FLG_HIDEN == FLG_HIDEN)){$input["flag"]-=FLG_HIDEN;}
+			if(($input["flag"] & FLG_HIDDEN == FLG_HIDDEN)){$input["flag"]-=FLG_HIDDEN;}
 		}
 		$no=$updaterequests->insert(array(
 			"requester"=>$_SESSION["ID"],

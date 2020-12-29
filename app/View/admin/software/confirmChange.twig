@@ -69,7 +69,7 @@
 	<input type="hidden" name="patchUrl" value="{{ patchUrl }}">
 
 	<dl>
-		{% if hiden=="no" %}
+		{% if hidden=="no" %}
 			<dt>このソフトウェアは、公開ソフトウェア一覧に表示されます。</dt>
 		{% else %}
 			<dt>このソフトウェアは、公開ソフトウェア一覧から隠されます。</dt>
@@ -78,14 +78,13 @@
 	
 	<input type="hidden" name="step" value="confirm">
 	<input type="hidden" name="type" value="{{ type }}">
-	<input type="hidden" name="hiden" value="{{ hiden }}">
+	<input type="hidden" name="hidden" value="{{ hidden }}">
 	<input type="hidden" name="flag" value="{{ flag }}">
 
 	<input type="submit" value="ＯＫ">
 </form>
 
-<div class="my-5">
-</div>
+<div class="my-5"></div>
 
 {% endblock %}
 

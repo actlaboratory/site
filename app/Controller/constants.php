@@ -1,3 +1,3 @@
 <?php
 
-const FLG_HIDEN = 0x1;
+const FLG_HIDDEN = 0x1;
