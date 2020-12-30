@@ -392,9 +392,9 @@ function setEdit($input,$db){
 			"requester"=>$_SESSION["ID"],
 		));
 		if($input["hidden"]!="no"){
-			if(($input["flag"] & FLG_HIDDEN) == 0){$input["flag"]+=FLG_HIDDEN;}
+			$input["flag"]=$input["flag"]|FLG_HIDDEN;
 		}else{
-			if(($input["flag"] & FLG_HIDDEN == FLG_HIDDEN)){$input["flag"]-=FLG_HIDDEN;}
+			$input["flag"] = $input["flag"]&(~FLG_HIDDEN);
 		}
 		$no=$updaterequests->insert(array(
 			"requester"=>$_SESSION["ID"],

@@ -13,9 +13,6 @@ $app->get('/admin/softwares/', function (Request $request, Response $response) {
 	$data["softwares"]=$softwares->getLatest();
 	foreach($data["softwares"] as &$software){
         SoftwareUtil::makeTextVersion($software);
-        if($software["flag"]==FLG_HIDEN){
-
-        }
     }
 
     // Render index view

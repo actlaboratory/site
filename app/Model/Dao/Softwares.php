@@ -32,7 +32,6 @@ class Softwares extends Dao{
 		if($keyword!=null){
 			$queryBuilder->where("A.keyword = :kwd")
 				-> setParameter(":kwd", $keyword);
-		
 		}
 		$queryBuilder->where("A.flag & $excludeFlag = 0");
 
