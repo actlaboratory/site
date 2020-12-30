@@ -1,0 +1,56 @@
+{#レイアウト継承#}
+{% extends "layout/layout.twig" %}
+
+{# タイトル #}
+{% block title %} 公開するソフトウェアについて {% endblock %}
+
+{# スタイルシートの追加 #}
+{% block header_scripts_add %}
+{% endblock %}
+
+{# ページ本文 #}
+{% block page_content %}
+	<div class="jumbotron">
+		<h2 class="text-center">
+			公開するソフトウェアについて
+		</h2>
+	</div>
+
+	<div class="d-flex align-items-center  text-white bg-primary px-3">
+		<h3 class="h2 my-0">動作環境について</h3>
+	</div>
+	<div class="container p-5">
+		<p>
+			当サイトで公開するソフトウェアの動作には、以下の環境が必要です。
+		</p>
+		<p>
+			OS: Windows10以上<br>
+			画面を目視確認する場合は、HDサイズ（横1280ドット、縦720ドット）以上の表示領域<br>
+			スクリーンリーダーを使用する場合は、コンピュータから音の出る環境<br>
+		</p>
+		<p>
+			また、以下のスクリーンリーダーにて読み上げ確認を行っております。
+		</p>
+		<ul>
+			<li>PC-Talker 10</li>
+			<li>NVDA日本語版 2020.3jp</li>
+			<li>JAWS 2020 日本語版</li>
+		</ul>
+		<p>上記の環境が快適に動作するコンピュータでご利用ください。</p>
+	</div>
+
+	<div class="d-flex align-items-center  text-white bg-primary px-3">
+		<h3 class="h2 my-0">再配布等について</h3>
+	</div>
+	<div class="container p-5">
+		<p>
+			当サイトのソフトウェアは、GPLなどのライセンスの下で配布される、オープンソースソフトウェアです。<br>
+			各ソフトウェアのライセンスに基づき、再配布など、自由に利用することができます。<br>
+			なお、再配布などされる際は、等ラボまでご一報いただけますと幸いです。
+		</p>
+	</div>
+{% endblock %}
+
+{# フッダ以降に追加する内容 #}
+{% block footer_scripts_add %}
+{% endblock %}
