@@ -230,7 +230,7 @@ function paramCheck2($input){
 	}
 
 	if (ValidationUtil::checkParam($input,array(
-		"infoString"=>"/^.{10,100}$/"
+		"infoString"=>"/^.{10,100}$/u"
 	))==false){
 		$message.="お知らせ文字列は10～100字で入力してください。";
 	}
