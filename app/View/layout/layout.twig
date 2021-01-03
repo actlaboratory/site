@@ -8,17 +8,17 @@
 	<meta name = "twitter:site" content = "@act_laboratory">
 	<meta property = "og:url" content = "{{ get_current_url() }}">
 	{% if description == "" %}
-	{% set description = "ACT Laboratory(Accessible Tools Laboratory)は、プログラミングを学ぶ視覚障害者の集まりです。私たちは、画面読み上げソフト（スクリーンリーダー）で使用できるソフトウェアの開発を行っています。" %}
+	{% set description = "ACT Laboratory(Accessible Tools Laboratory)は、プログラミングを学ぶ視覚障害者の集まりです。" %}
 	{% endif %}
 	<meta name = "description" content = "{{ description }}">
 	<meta property = "og:description" content = "{{ description }}">
-	<meta property="og:site_name" content="ACT laboratory">
+	<meta property="og:site_name" content="ACT Laboratory">
 	{% if not page_type == "website" or page_type == "product" or page_type == "article" %}
 	{% set page_type = "article" %}
 	{% endif %}
 	<meta property="og:type" content = "{{ page_type }}">
-	<meta property="og:title" content = "{{ title }}">
-	<title>{{ title }} - ACT laboratory</title>
+	<meta property="og:title" content = "{{ title }} - ACT Laboratory">
+	<title>{{ title }} - ACT Laboratory</title>
 	{% block header_scripts_add %}{% endblock %}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     {# font awsomeパッケージを利用します#}
