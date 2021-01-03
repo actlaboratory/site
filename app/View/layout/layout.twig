@@ -16,6 +16,9 @@
 	{% if not page_type == "website" or page_type == "product" or page_type == "article" %}
 	{% set page_type = "article" %}
 	{% endif %}
+	{% set page_keywords = page_keywords|merge(["ACT laboratory","actlab","視覚障害","スクリーンリーダー","アクセシビリティー"]) %}
+	<meta name="keywords" content = "{{ page_keywords|join(",") }}">
+	<meta name="keywords" content = "{{ page_keywords|join(",") }}">
 	<meta property="og:type" content = "{{ page_type }}">
 	<meta property="og:title" content = "{{ title }} - ACT Laboratory">
 	<title>{{ title }} - ACT Laboratory</title>
