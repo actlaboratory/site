@@ -80,17 +80,26 @@ function setInformationsApprove(array $data,$db,$view,$response){	#本人以外�
 		"type"=>"informations"
 	));
 	$info=unserialize($request["value"]);
-	$infoDB=new Informations($db);
 	if(empty($info["infoURL"])){
 		$info["infoURL"]=NULL;
 	}
-	$infoDB->insert(array(
-		"title"=>$info["infoString"],
-		"date"=>date("Y-m-d"),
-		"url"=>$info["infoURL"],
-		0
-	));
+	publishInformation($info["infoString"],$info["infoURL"]);
 	$updaterequests->delete(array("id"=>$data["requestId"]));
 	return "更新が完了しました。";
 }
 
+
+
+function publishInformation(string $content,string $url=null,string $publishDate=null){
+	global $app;
+	$infoDB=new Informations($app->getContainer()["db"]);
+	if ($publishDate===null){
+		$publishDate=date("Y-m-d");
+	}
+	$infoDB->insert(array(
+		"title"=>$content,
+		"date"=>$publishDate,
+		"url"=>$url,
+		"flag"=>0
+	));
+}

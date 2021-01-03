@@ -1,7 +1,6 @@
 <?php
 use Slim\Http\Request;
 use Slim\Http\Response;
-use Model\Dao\Informations;
 use Model\Dao\Members;
 use Model\Dao\Softwares;
 use Model\Dao\SoftwareVersions;
@@ -357,19 +356,11 @@ function setNew($input,$db){
 		$gitData=GitHubUtil::connect("/repos/".$info["gitHubURL"]."releases/".$info["releaseId"],"PATCH",array("draft"=>false));
 
 		if(!empty(info["infoString"])){
-			$informations=new Informations($db);
-			$informations->insert(array(
-				"title"=>$info["infoString"],
-				"date"=>date("Y-m-d"),
-				"url"=>"/software/".$info["keyword"],
-				0
-			));
+			publishInformation($info["infoString"],"/software/".$info["keyword"]);
 		}
 
 		$softwareVersions = new SoftwareVersions($db);
 		$softwareVersions->insert($versionData);
-
-		$informations=new Informations($db);
 
 		$updaterequests->delete(array("id"=>$request["id"]));
 		return "更新が完了しました。";
