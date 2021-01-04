@@ -355,7 +355,7 @@ function setNew($input,$db){
 		//検証とドラフトのリリース
 		$gitData=GitHubUtil::connect("/repos/".$info["gitHubURL"]."releases/".$info["releaseId"],"PATCH",array("draft"=>false));
 
-		if(!empty(info["infoString"])){
+		if(!empty($info["infoString"])){
 			publishInformation($info["infoString"],"/software/".$info["keyword"]);
 		}
 
