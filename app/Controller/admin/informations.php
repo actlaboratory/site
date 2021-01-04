@@ -103,5 +103,5 @@ function publishInformation(string $content,string $url=null,string $publishDate
 		"url"=>$url,
 		"flag"=>0
 	));
-	TwitterUtil::tweet($text.$url);
+	TwitterUtil::tweet($text."\n".$url);
 }
