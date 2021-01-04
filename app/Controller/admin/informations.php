@@ -5,6 +5,7 @@ use Slim\Http\Response;
 use Model\Dao\Informations;
 use Model\Dao\Updaterequests;
 use Util\ValidationUtil;
+use Util\TwitterUtil;
 
 // お知らせ配信画面表示
 $app->get('/admin/informations',function (Request $request, Response $response, $args) {
@@ -102,4 +103,5 @@ function publishInformation(string $content,string $url=null,string $publishDate
 		"url"=>$url,
 		"flag"=>0
 	));
+	TwitterUtil::tweet($text."\n".$url);
 }
