@@ -54,4 +54,6 @@
 - doctorine/dbal
 - bryanjhv/slim-session
 - Bootstrap4
+- abraham/twitteroauth
+- nojimage/twitter-text-php
 - lightboard
