@@ -62,7 +62,7 @@ function informationsCheck(array $data){
 		$url = $data["infoURL"];
 	}
 	if($message == ""){
-		if(TwitterUtil::getLength($data["infoString"], $url) > 280){
+		if(!TwitterUtil::isTweetable($data["infoString"], $url)){
 			$message .= "お知らせ文字列がツイートできる文字数を超えています。";
 		}
 	}

@@ -229,7 +229,7 @@ function paramCheck2($input){
 	}
 
 	if(!empty($input["infoString"])){
-		if(TwitterUtil::getLength($input["infoString"], SoftwareUtil::makeSoftwareUrl($input["keyword"])) > 280){
+		if(!TwitterUtil::isTweetable($input["infoString"], SoftwareUtil::makeSoftwareUrl($input["keyword"]))){
 			$message .= "お知らせ文字列がツイートできる長さを超えています。";
 		}
 	}
