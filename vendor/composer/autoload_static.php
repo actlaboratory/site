@@ -195,6 +195,10 @@ class ComposerStaticInit3fa10fcab5578b5614493f6023b0fa59
     public static $prefixesPsr0 = array (
         'T' => 
         array (
+            'Twitter\\Text\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/nojimage/twitter-text-php/lib',
+            ),
             'Twig_Extensions_' => 
             array (
                 0 => __DIR__ . '/..' . '/twig/extensions/lib',

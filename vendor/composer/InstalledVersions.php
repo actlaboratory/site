@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'ff8377d3add902b66d7d90d257bd37fe9090d49f',
+    'reference' => '93226038ef51e8e48900765b1812df034f0515ac',
     'name' => 'slim/slim-skeleton',
   ),
   'versions' => 
@@ -145,6 +145,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '181d480e08d9476e61381e04a71b34dc0432e812',
+    ),
+    'nojimage/twitter-text-php' => 
+    array (
+      'pretty_version' => 'v3.1.1',
+      'version' => '3.1.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '7f466b331cebfdd00e3568acaf45f2e90a39a320',
     ),
     'phpdocumentor/reflection-common' => 
     array (
@@ -410,7 +419,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'ff8377d3add902b66d7d90d257bd37fe9090d49f',
+      'reference' => '93226038ef51e8e48900765b1812df034f0515ac',
     ),
     'slim/twig-view' => 
     array (
