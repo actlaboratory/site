@@ -14,8 +14,12 @@ class TwitterUtil{
 		return $result;
 	}
 
-	public static function getLength($tweet){
+	public static function getLength($tweet, $url = ""){
+		$tweetText = $tweet;
+		if($url != ""){
+			$tweetText .= "\n" . UrlUtil::toAbsUrl($url);
+		}
 		$validator = Text\Validator::create();
-		return $validator->getTweetLength($tweet);
+		return $validator->getTweetLength($tweetText);
 	}
 }

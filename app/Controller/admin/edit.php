@@ -9,7 +9,7 @@ use Util\SoftwareUtil;
 use Util\ValidationUtil;
 use Util\MembersUtil;
 use Util\GitHubUtil;
-
+use Util\TwitterUtil;
 
 // ソフトウェア情報作成・修正へ
 $app->get('/admin/softwares/edit/{keyword}',function (Request $request, Response $response, $args) {
@@ -229,10 +229,8 @@ function paramCheck2($input){
 	}
 
 	if(!empty($input["infoString"])){
-		if (ValidationUtil::checkParam($input,array(
-			"infoString"=>"/^.{10,100}$/u"
-		))==false){
-			$message.="お知らせ文字列は10～100字で入力してください。";
+		if(TwitterUtil::getLength($input["infoString"], SoftwareUtil::makeSoftwareUrl($input["keyword"])) > 280){
+			$message .= "お知らせ文字列がツイートできる長さを超えています。";
 		}
 	}
 
