@@ -2,7 +2,7 @@
 
 
 ## 動作環境
-- PHP5.5以上
+- PHP5.5以上かつintlが有効かされていること
 - Perl5系
 - Apache 2.4
 - Mysql5系
