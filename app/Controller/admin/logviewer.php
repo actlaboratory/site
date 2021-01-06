@@ -19,7 +19,7 @@ $app->get('/admin/logviewer/', function (Request $request, Response $response) {
 $app->get('/admin/logviewer/{fileName}', function (Request $request, Response $response, $args) {
 	$fileName=dirname($_SERVER["SCRIPT_FILENAME"]). '/logs/'.$args["fileName"];
 	if (file_exists($fileName)){
-		$response->write(file_get_contents($fileName));
+		return $response->write(file_get_contents($fileName));
 	} else {
 		$response->withStatus(404,"not found");
 		return $response->write("file not found. :".$fileName);
