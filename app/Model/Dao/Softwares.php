@@ -47,7 +47,7 @@ class Softwares extends Dao{
 		$queryBuilder
 		->select("t1.software_id, t1.major, t1.minor, t1.patch, t1.released_at, t1.updater_URL, t1.hist_text, t1.updater_hash")
 		->from("software_versions","t1")
-		->orderBy("t1.released_at","DESC")
+		->orderBy("t1.major*1000000+t1.minor*1000+t1.patch","DESC")
 		->where("t1.major*1000000+t1.minor*1000+t1.patch > :version")
 		->setParameter(":version", $versions[0]*1000000+$versions[1]*1000+$versions[2]);
 		if(!$keyword == ""){
