@@ -39,7 +39,7 @@ class Informations extends Dao
     function getYears($order="ASC"){
         //クエリを構築する
         $queryBuilder = parent::getQueryBuilder()
-            ->select('DISTINCT YEAR(date) as date')
+            ->select('DISTINCT YEAR(date) as year')
             ->from($this->_table_name)
             ->orderBy("date", $order);
 
@@ -49,7 +49,15 @@ class Informations extends Dao
         //レコードの取得
         $result = $query->FetchALL();
         //結果を返送
-        return $result;
+        if (empty($result)){
+            return [];
+        } else{
+            $ret = [];
+            foreach($result as $d){
+                array_push($ret, $d["year"]);
+            }
+            return $ret;
+        }
     }
 
 }

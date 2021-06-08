@@ -22,7 +22,7 @@
 						<select class="mb-2" name="showYear" required>
 							<option value="" selected>表示する年を選択</option>
 							{% for y in informationYears %}
-								<option value="{{ y.date }}">{{ y.date }}年</option>
+								<option value="{{ y }}">{{ y }}年</option>
 							{% endfor %}
 						</select>
 						<input type="submit" class="btn btn-success ml-2" value="更新">

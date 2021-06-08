@@ -28,7 +28,7 @@ function makeInformationsPageData($request, $db, $year=NULL){
     $data["informationYears"] = $info->getYears("DESC");
     if (empty($year)){
         if (!empty($data["informationYears"])){
-            $year = $data["informationYears"][0]["date"];
+            $year = $data["informationYears"][0];
         } else{
             $year = (int)date("Y");
         }
