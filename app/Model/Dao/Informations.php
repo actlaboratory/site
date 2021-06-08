@@ -2,7 +2,6 @@
 
 namespace Model\Dao;
 
-use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\DBAL\DBALException;
 use PDO;
 
@@ -10,12 +9,9 @@ use PDO;
 class Informations extends Dao
 {
     // 年ごとにお知らせを取得
-    function selectFromYear($year, $sort, $order, $limit=NULL){
-        //クエリビルダをインスタンス化
-        $queryBuilder = new QueryBuilder($this->db);
-
+    function selectFromYear(int $year, $sort, $order, $limit=NULL){
         //ベースクエリを構築する
-        $queryBuilder
+        $queryBuilder = parent::getQueryBuilder()
             ->select('*')
             ->from($this->_table_name)
             ->where("year(date) = ". (int)$year);
@@ -41,14 +37,11 @@ class Informations extends Dao
 
     // 年一覧取得
     function getYears($order="ASC"){
-        $queryBuilder = new QueryBuilder($this->db);
-
-        //ベースクエリを構築する
-        $queryBuilder
+        //クエリを構築する
+        $queryBuilder = parent::getQueryBuilder()
             ->select('DISTINCT YEAR(date) as date')
-            ->from($this->_table_name);
-
-        $queryBuilder->orderBy("date", $order);
+            ->from($this->_table_name)
+            ->orderBy("date", $order);
 
         //クエリ実行
         $query = $queryBuilder->execute();
